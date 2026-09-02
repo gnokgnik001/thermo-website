@@ -1,0 +1,29 @@
+# THERMO Co., Ltd. (บริษัท เทอร์โม จำกัด)
+
+> ผู้เชี่ยวชาญด้านการออกแบบ ติดตั้ง และบำรุงรักษาระบบทำความเย็นอุตสาหกรรมแบบครบวงจร ก่อตั้งปี 1987 ทีมวิศวกรประสบการณ์รวมกว่า 40 ปี ผลงานกว่า 500 โครงการ
+
+THERMO ให้บริการห้องเย็น ห้องแช่แข็ง Blast Freezer ระบบชิลเลอร์ ห้องควบคุมความชื้น Wine Cellar ประตูความเร็วสูง และระบบมอนิเตอร์ริ่ง
+
+## บริการ (Services)
+- [ห้องเย็น (Cold Room)](https://www.thermothailand.com/services/coldroom/)
+- [ระบบชิลเลอร์ (Chiller System)](https://www.thermothailand.com/services/chiller/)
+- [ห้องควบคุมสภาวะแวดล้อม & งานเฉพาะทาง](https://www.thermothailand.com/services/special/)
+- [ประตูความเร็วสูง (Hi-Speed Door)](https://www.thermothailand.com/services/hispeeddoor/)
+- [ระบบมอนิเตอร์ริ่ง (Monitoring System)](https://www.thermothailand.com/services/monitoring/)
+
+## คลังความรู้ (Knowledge Base)
+- [ก่อนสร้างห้องเย็น: 5 การตัดสินใจที่ชี้ว่าคุ้มหรือไม่คุ้ม (ฉบับวิศวกร)](https://www.thermothailand.com/knowledge/coldroom-checklist/)
+- [ห้องเย็นมีกี่ประเภท และคุณต้องการแบบไหนกันแน่](https://www.thermothailand.com/knowledge/coldroom-types/)
+- [ห้องเย็นแบบไหนต้องขอ ร.ง.4 — เช็คก่อนสร้าง ไม่งั้นสร้างไม่ได้](https://www.thermothailand.com/knowledge/rg4-license/)
+- [ทำไมห้องเย็นต้องใช้ไฟ 380V 3 เฟส — และจะเกิดอะไรถ้าฝืนใช้ 220V](https://www.thermothailand.com/knowledge/power-3phase/)
+- [Chiller คืออะไร และใช้ได้กับงานอะไรบ้างที่คุณอาจนึกไม่ถึง](https://www.thermothailand.com/knowledge/chiller-explained/)
+- [Wine Cellar ไม่ใช่ห้องเย็นที่เย็นน้อยลง — และนี่คือเหตุผล](https://www.thermothailand.com/knowledge/wine-cellar/)
+- [ออกแบบห้องเย็นยังไงให้โรงงานขอ อย. และ GMP ผ่าน](https://www.thermothailand.com/knowledge/gmp-fda-coldroom/)
+- [PM ระบบทำความเย็น — ช่างที่มาดูแล ควรตรวจอะไรบ้าง](https://www.thermothailand.com/knowledge/preventive-maintenance/)
+- [ห้องเย็นสำหรับครัวกลางและ Catering: ออกแบบ Cold Chain ให้ล้อไปกับ Flow การทำงาน (ฉบับวิศวกร)](https://www.thermothailand.com/knowledge/central-kitchen-cold-chain/)
+
+## ติดต่อ
+- ที่อยู่: 280 ซอยอ่อนนุช 17 แยก 16 แขวงสวนหลวง เขตสวนหลวง กรุงเทพมหานคร 10250
+- โทรศัพท์: 02 717 8065-7
+- อีเมล: info@thermothailand.com
+- เว็บไซต์: https://www.thermothailand.com

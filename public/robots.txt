@@ -1,0 +1,5 @@
+# robots.txt — THERMO Co., Ltd.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.thermothailand.com/sitemap.xml
