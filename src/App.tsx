@@ -38,7 +38,7 @@ import {
   Headset
 } from 'lucide-react';
 
-import { SITE_URL, translations, servicesData, projectsData, whyChooseUsData, articlesData, statsData, articlesList, lineConfig } from './content';
+import { SITE_URL, translations, servicesData, projectsData, whyChooseUsData, articlesData, statsData, articlesList, lineConfig, companyInfo } from './content';
 import { ImageWithFallback } from './components/ImageWithFallback';
 import { Careers } from './components/Careers';
 import { QuoteModal } from './components/QuoteModal';
@@ -83,12 +83,13 @@ function AnimatedCounter({ value, duration = 1500 }: { value: string; duration?:
   useEffect(() => {
     if (!hasStarted) return;
     
-    const match = value.match(/^(\d+)/);
+    // รองรับตัวเลขมีคอมมา เช่น "2,000+"
+    const match = value.match(/^(\d[\d,]*)/);
     if (!match) {
       return;
     }
     
-    const target = parseInt(match[1], 10);
+    const target = parseInt(match[1].replace(/,/g, ''), 10);
     let startTimestamp: number | null = null;
     
     const step = (timestamp: number) => {
@@ -104,15 +105,17 @@ function AnimatedCounter({ value, duration = 1500 }: { value: string; duration?:
     return () => window.cancelAnimationFrame(animId);
   }, [hasStarted, value, duration]);
 
-  const numPart = value.match(/^(\d+)/);
+  const numPart = value.match(/^(\d[\d,]*)/);
   if (!numPart) {
     return <span ref={elementRef}>{value}</span>;
   }
-  const suffix = value.replace(/^\d+/, '');
+  const hasComma = numPart[1].includes(',');
+  const suffix = value.slice(numPart[1].length);
+  const shown = hasStarted ? count : 0;
 
   return (
     <span ref={elementRef} className="tabular-nums">
-      {hasStarted ? count : 0}
+      {hasComma ? shown.toLocaleString('en-US') : shown}
       {suffix}
     </span>
   );
@@ -283,10 +286,10 @@ export default function App() {
     if (currentPage === 'home') {
       if (lang === 'th') {
         title = 'THERMO Co., Ltd. | ผู้เชี่ยวชาญระบบทำความเย็นอุตสาหกรรม ห้องเย็น ชิลเลอร์';
-        desc = 'บริษัท เทอร์โม จำกัด - ออกแบบ ติดตั้ง และบำรุงรักษาระบบทำความเย็นอุตสาหกรรม ห้องเย็นสำเร็จรูป และเครื่องทำน้ำเย็นชิลเลอร์ประสิทธิภาพสูง ให้บริการตั้งแต่ปี 2530 ผลงานกว่า 500 โครงการทั่วประเทศ';
+        desc = 'บริษัท เทอร์โม จำกัด - ออกแบบ ติดตั้ง และบำรุงรักษาระบบทำความเย็นอุตสาหกรรม ห้องเย็นสำเร็จรูป และเครื่องทำน้ำเย็นชิลเลอร์ประสิทธิภาพสูง ให้บริการตั้งแต่ปี 2530 ผลงานกว่า 2,000 โครงการทั่วประเทศ';
       } else {
         title = 'THERMO Co., Ltd. | Industrial Cooling Systems, Cold Room & Chiller Specialists';
-        desc = 'THERMO Co., Ltd. - Industrial refrigeration, turnkey cold rooms and process chillers since 1987. Over 500 projects delivered across Thailand.';
+        desc = 'THERMO Co., Ltd. - Industrial refrigeration, turnkey cold rooms and process chillers since 1987. Over 2,000 projects delivered across Thailand.';
       }
     } else if (currentPage === 'services' && currentServiceId) {
       const svc = servicesData.find(s => s.id === currentServiceId);
@@ -1756,40 +1759,32 @@ export default function App() {
                 {t.footerTagline}
               </p>
               
-              {/* Social icons */}
-              <div className="flex items-center space-x-3.5">
-                <a 
-                  href="#" 
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-brand-green hover:text-white flex items-center justify-center transition-colors text-white/80"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="w-4 h-4" />
-                </a>
-                <a 
-                  href="#" 
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-brand-green hover:text-white flex items-center justify-center transition-colors text-white/80"
-                  aria-label="Youtube"
-                >
-                  <Youtube className="w-4 h-4" />
-                </a>
-                <a 
-                  href="#" 
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-brand-green hover:text-white flex items-center justify-center transition-colors text-white/80"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-                {/* Custom Twitter/X SVG */}
-                <a 
-                  href="#" 
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-brand-green hover:text-white flex items-center justify-center transition-colors text-white/80"
-                  aria-label="Twitter X"
-                >
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </a>
-              </div>
+              {/* Social icons — แสดงเฉพาะช่องทางที่ใส่ URL จริงใน companyInfo (content.js)
+                   ยังเป็น "#" อยู่ = ซ่อนไว้ (ลิงก์ว่างไม่ดีต่อ SEO) */}
+              {(() => {
+                const iconClass = "w-9 h-9 rounded-xl bg-white/5 hover:bg-brand-green hover:text-white flex items-center justify-center transition-colors text-white/80";
+                const isReal = (u?: string) => !!u && u !== '#';
+                const socials = [
+                  { url: (companyInfo as any).facebookUrl, label: 'Facebook', icon: <Facebook className="w-4 h-4" /> },
+                  { url: (companyInfo as any).youtubeUrl, label: 'YouTube', icon: <Youtube className="w-4 h-4" /> },
+                  { url: (companyInfo as any).linkedinUrl, label: 'LinkedIn', icon: <Linkedin className="w-4 h-4" /> },
+                  { url: (companyInfo as any).twitterUrl, label: 'X', icon: (
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                  ) },
+                ].filter(x => isReal(x.url));
+                if (socials.length === 0) return null;
+                return (
+                  <div className="flex items-center space-x-3.5">
+                    {socials.map(x => (
+                      <a key={x.label} href={x.url} target="_blank" rel="noopener noreferrer" className={iconClass} aria-label={x.label}>
+                        {x.icon}
+                      </a>
+                    ))}
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Col 2: Services links */}
@@ -1834,7 +1829,6 @@ export default function App() {
               <ul className="space-y-2.5 font-sans text-xs sm:text-sm text-brand-surface/70">
                 <li><a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-white transition-colors">{lang === 'th' ? 'เกี่ยวกับเรา' : 'About Us'}</a></li>
                 <li><a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="hover:text-white transition-colors">{lang === 'th' ? 'ผลงานของเรา' : 'Our Projects'}</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">{lang === 'th' ? 'ข่าวสาร & กิจกรรม' : 'News & Activities'}</a></li>
                 <li><a href={lang === 'en' ? '/en/careers' : '/careers'} onClick={(e) => { e.preventDefault(); navigate('careers'); }} className="hover:text-white transition-colors">{lang === 'th' ? 'ร่วมงานกับเรา' : 'Careers'}</a></li>
               </ul>
             </div>
@@ -1846,9 +1840,11 @@ export default function App() {
               </h4>
               <ul className="space-y-2.5 font-sans text-xs sm:text-sm text-brand-surface/70">
                 <li><a href="#knowledge" onClick={(e) => handleNavClick(e, 'knowledge')} className="hover:text-white transition-colors">{lang === 'th' ? 'บทความ' : 'Articles'}</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">{lang === 'th' ? 'เทคโนโลยีความเย็น' : 'Cooling Technology'}</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">{lang === 'th' ? 'ดาวน์โหลดเอกสาร' : 'Downloads'}</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">{lang === 'th' ? 'คำถามที่พบบ่อย' : 'FAQs'}</a></li>
+                {/* ลิงก์บทความพื้นฐาน (แทน "เทคโนโลยีความเย็น" เดิมที่เป็นลิงก์ว่าง — ปุ่ม "บทความ" ด้านบนพาไปคลังความรู้อยู่แล้ว) */}
+                <li><a href={lang === 'en' ? '/en/knowledge/coldroom-types/' : '/knowledge/coldroom-types/'} onClick={(e) => { e.preventDefault(); navigate('article', 'coldroom-types'); }} className="hover:text-white transition-colors">{lang === 'th' ? 'ห้องเย็นมีกี่ประเภท' : 'Types of Cold Rooms'}</a></li>
+                {/* หน้าเครื่องคำนวณเป็นไฟล์ static แยกจาก React (public_html/tools/cold-room-calculator/)
+                     ต้องใช้ลิงก์ธรรมดา ห้ามใช้ navigate() ไม่งั้นจะเจอหน้า 404 ของ SPA */}
+                <li><a href="/tools/cold-room-calculator/" className="hover:text-white transition-colors">{lang === 'th' ? 'คำนวณขนาดห้องเย็น' : 'Cold Room Calculator (Thai)'}</a></li>
               </ul>
             </div>
 
@@ -1891,11 +1887,6 @@ export default function App() {
           {/* Bottom Bar copyright */}
           <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-brand-surface/50 font-sans gap-4">
             <span>© 2026 THERMO Co., Ltd. All rights reserved.</span>
-            <div className="flex space-x-6">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Sitemap</a>
-            </div>
           </div>
 
         </div>

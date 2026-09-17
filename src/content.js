@@ -124,7 +124,7 @@ export const services = [
         "ห้องเย็นแบ่งตามช่วงอุณหภูมิใช้งาน — Chill Room อยู่ที่ -5 ถึง +8°C ซึ่งใช้แพร่หลายที่สุดในเกือบทุกอุตสาหกรรม ตั้งแต่วัตถุดิบอาหารและเครื่องดื่ม ยาและสมุนไพร ไปจนถึงไมโครโปรเซสเซอร์ ส่วนห้องแช่แข็ง (Freezer) อยู่ที่ -15 ถึง -25°C ลงไป สำหรับเก็บรักษาคุณภาพระยะยาว",
         "Blast Freezer และ Blast Chiller ต่างออกไป เพราะมันไม่ใช่ \"ห้องเก็บ\" แต่เป็น \"กระบวนการ\" — ลดอุณหภูมิสินค้าลงอย่างรวดเร็วถึงอุณหภูมิเป้าหมายภายในเวลาที่กำหนด เพื่อรักษาคุณภาพให้ใกล้เคียงของสดที่สุด ด้วยเหตุนี้เครื่องทำความเย็นจึงต้องใหญ่กว่าห้องเย็นทั่วไปพอสมควร การเอาห้องแช่แข็งธรรมดามาใช้แทนจึงมักไม่ได้ผลลัพธ์ตามที่ต้องการ",
         "ผนังห้องเย็นใช้แผ่นฉนวนแบบ Sandwich panel คือขึ้นรูปฉนวนไว้ตรงกลาง ประกบวัสดุปิดผิวทั้งสองด้าน ชนิดของฉนวนมีคุณสมบัติต่างกันทั้งความหนาแน่น ความคงทน การนำความร้อน การดูดซับเสียง และการทนไฟ — เลือกให้ตรงกับอุณหภูมิและเงื่อนไขหน้างาน ไม่ใช่เลือกที่หนาที่สุดแล้วจบ",
-        "งานที่ผ่านมือเรามีตั้งแต่ห้องเย็นคลังสินค้าระหว่างประเทศที่ท่าอากาศยานสุวรรณภูมิ ห้องเย็นหลังร้าน KFC 250 สาขาทั่วประเทศ ห้องเย็นเก็บทุเรียนสดเพื่อแปรรูปที่จันทบุรี ไปจนถึง Blast Freezer ในสถาบันวิจัยวิทยาศาสตร์และเทคโนโลยีแห่งประเทศไทย — คนละโจทย์กันทั้งหมด และนั่นคือประเด็น",
+        "งานที่ผ่านมือเรามีตั้งแต่ห้องเย็นคลังสินค้าระหว่างประเทศที่ท่าอากาศยานสุวรรณภูมิ ห้องเย็นหลังร้าน KFC กว่า 200 สาขาทั่วประเทศ ห้องเย็นเก็บทุเรียนสดเพื่อแปรรูปที่จันทบุรี ไปจนถึง Blast Freezer ในสถาบันวิจัยวิทยาศาสตร์และเทคโนโลยีแห่งประเทศไทย — คนละโจทย์กันทั้งหมด และนั่นคือประเด็น",
         "ห้องเย็นไม่ใช่ของที่ซื้อแล้วจบ มันคือเครื่องจักรที่ต้องวิ่ง 24 ชั่วโมง การดูแลอย่างสม่ำเสมอและถูกวิธียืดอายุระบบ ประหยัดค่าไฟ และยืดอายุอะไหล่ไปพร้อมกัน — เราจึงไม่ได้จบงานตอนส่งมอบ"
       ],
       en: [
@@ -133,7 +133,7 @@ export const services = [
         "Cold rooms divide by operating range. Chill rooms sit at -5 to +8°C — the most widely used band across nearly every industry, from food and beverage raw materials to pharmaceuticals and herbs to microprocessors. Freezers run at -15 to -25°C and below for long-term preservation.",
         "Blast freezers and blast chillers are a different animal: not storage, but a process. They pull product temperature down rapidly to a target within a defined window, holding quality as close to fresh as possible. That demands a considerably larger plant than an ordinary cold room — which is why substituting a standard freezer rarely delivers the intended result.",
         "Cold room walls use sandwich panels: insulation formed in the core, faced on both sides. Insulation types differ in density, durability, thermal conductivity, acoustic absorption and fire resistance — the right choice follows your temperature and site conditions, not simply whichever is thickest.",
-        "Our work spans international cargo cold rooms at Suvarnabhumi Airport, back-of-house rooms in 250 KFC branches nationwide, fresh durian rooms in Chanthaburi, and a blast freezer at the Thailand Institute of Scientific and Technological Research — entirely different briefs, which is precisely the point.",
+        "Our work spans international cargo cold rooms at Suvarnabhumi Airport, back-of-house rooms in over 200 KFC branches nationwide, fresh durian rooms in Chanthaburi, and a blast freezer at the Thailand Institute of Scientific and Technological Research — entirely different briefs, which is precisely the point.",
         "A cold room isn't a purchase, it's machinery that runs around the clock. Correct, regular maintenance extends system life, lowers your power bill, and prolongs component life at the same time — which is why our job doesn't end at handover."
       ]
     },
@@ -177,14 +177,14 @@ export const services = [
         { label: "ผนังห้องเย็น", value: "Sandwich panel — เลือกชนิดฉนวนตามงาน" },
         { label: "รูปแบบงาน", value: "ออกแบบและคำนวณเฉพาะรายโครงการ" },
         { label: "ขอบเขตบริการ", value: "ให้คำปรึกษา ออกแบบ ติดตั้ง และดูแลหลังการขาย" },
-        { label: "ผลงานอ้างอิง", value: "คลังสินค้าสุวรรณภูมิ · KFC 250 สาขา · ทุเรียนจันทบุรี · Blast Freezer วว." }
+        { label: "ผลงานอ้างอิง", value: "คลังสินค้าสุวรรณภูมิ · KFC กว่า 200 สาขา · ทุเรียนจันทบุรี · Blast Freezer วว." }
       ],
       en: [
         { label: "Operating Range", value: "Chill -5 to +8°C / Freezer -15 to -25°C / Blast to brief" },
         { label: "Wall Construction", value: "Sandwich panel — insulation selected per application" },
         { label: "Engagement Model", value: "Designed and calculated per project" },
         { label: "Scope", value: "Consultation, design, installation and after-sales support" },
-        { label: "Reference Projects", value: "Suvarnabhumi cargo · 250 KFC branches · Chanthaburi durian · TISTR blast freezer" }
+        { label: "Reference Projects", value: "Suvarnabhumi cargo · 200+ KFC branches · Chanthaburi durian · TISTR blast freezer" }
       ]
     },
     imgName: "service-coldroom.jpg",
@@ -1485,8 +1485,8 @@ export const aboutText = {
     en: "ABOUT US"
   },
   description: {
-    th: "THERMO ก่อตั้งเมื่อปี 1987 โดยทีมวิศวกรที่คลุกคลีอยู่กับงานทำความเย็นมาก่อนหน้านั้นแล้ว รวมประสบการณ์ในสายงานนี้กว่า 40 ปี — เราจึงเริ่มต้นจากหน้างานจริง ไม่ได้เริ่มจากแคตตาล็อก\n\nตั้งแต่นั้นมา เราออกแบบและติดตั้งงานมาแล้วกว่า 500 โครงการ ตั้งแต่ห้องเย็นคลังสินค้าระหว่างประเทศที่ท่าอากาศยานสุวรรณภูมิ ห้องเย็นหลังร้าน KFC 250 สาขาทั่วประเทศ ห้องเก็บ Raw Material ในโรงงานเซมิคอนดักเตอร์ ห้องเย็นเก็บทุเรียนสดที่จันทบุรี ไปจนถึง Wine Cellar ที่รีสอร์ตในมัลดีฟส์\n\nงานพวกนี้ไม่มีอะไรเหมือนกันเลย นอกจากข้อเดียว — ทุกงานเริ่มจากการฟังว่าคุณต้องการผลลัพธ์อะไร แล้วออกแบบระบบขึ้นมาตอบโจทย์นั้น เราไม่มีห้องเย็นสำเร็จรูปให้เลือกจากหน้าแคตตาล็อก และเราเชื่อว่านั่นคือเหตุผลที่ลูกค้ายังอยู่กับเรามาเกือบสี่ทศวรรษ",
-    en: "THERMO was founded in 1987 by engineers who were already deep in refrigeration work — over 40 years of combined experience in the field. We started from the plant floor, not from a catalogue.\n\nSince then we've designed and installed more than 500 projects: international cargo cold rooms at Suvarnabhumi Airport, back-of-house rooms in 250 KFC branches nationwide, raw material stores in semiconductor plants, fresh durian cold rooms in Chanthaburi, and wine cellars at resorts in the Maldives.\n\nThose jobs have nothing in common except one thing — each began by listening to the outcome you need, then engineering a system around it. We don't sell cold rooms off a catalogue page. We think that's why our clients have stayed with us for nearly four decades."
+    th: "THERMO ก่อตั้งเมื่อปี 1987 โดยทีมวิศวกรที่คลุกคลีอยู่กับงานทำความเย็นมาก่อนหน้านั้นแล้ว รวมประสบการณ์ในสายงานนี้กว่า 40 ปี — เราจึงเริ่มต้นจากหน้างานจริง ไม่ได้เริ่มจากแคตตาล็อก\n\nตั้งแต่นั้นมา เราออกแบบและติดตั้งงานมาแล้วกว่า 2,000 โครงการ ตั้งแต่ห้องเย็นคลังสินค้าระหว่างประเทศที่ท่าอากาศยานสุวรรณภูมิ ห้องเย็นหลังร้าน KFC กว่า 200 สาขาทั่วประเทศ ห้องเก็บ Raw Material ในโรงงานเซมิคอนดักเตอร์ ห้องเย็นเก็บทุเรียนสดที่จันทบุรี ไปจนถึง Wine Cellar ที่รีสอร์ตในมัลดีฟส์\n\nงานพวกนี้ไม่มีอะไรเหมือนกันเลย นอกจากข้อเดียว — ทุกงานเริ่มจากการฟังว่าคุณต้องการผลลัพธ์อะไร แล้วออกแบบระบบขึ้นมาตอบโจทย์นั้น เราไม่มีห้องเย็นสำเร็จรูปให้เลือกจากหน้าแคตตาล็อก และเราเชื่อว่านั่นคือเหตุผลที่ลูกค้ายังอยู่กับเรามาเกือบสี่ทศวรรษ",
+    en: "THERMO was founded in 1987 by engineers who were already deep in refrigeration work — over 40 years of combined experience in the field. We started from the plant floor, not from a catalogue.\n\nSince then we've designed and installed more than 2,000 projects: international cargo cold rooms at Suvarnabhumi Airport, back-of-house rooms in over 200 KFC branches nationwide, raw material stores in semiconductor plants, fresh durian cold rooms in Chanthaburi, and wine cellars at resorts in the Maldives.\n\nThose jobs have nothing in common except one thing — each began by listening to the outcome you need, then engineering a system around it. We don't sell cold rooms off a catalogue page. We think that's why our clients have stayed with us for nearly four decades."
   }
 };
 
@@ -1519,8 +1519,8 @@ export const stats = [
     id: "stat-3",
     iconName: "CheckSquare",
     num: {
-      th: "500+",
-      en: "500+"
+      th: "2,000+",
+      en: "2,000+"
     },
     label: {
       th: "โครงการสำเร็จ",
@@ -1585,7 +1585,7 @@ export const articles = [
 
 เราเข้าใจ มันเป็นคำถามที่ตอบง่ายที่สุด แต่ก็เป็นคำถามที่ผิดที่สุดที่จะถามเป็นข้อแรก เพราะราคาห้องเย็นไม่ใช่ "จุดเริ่มต้น" ที่เลือกได้ — มันคือ **ผลลัพธ์** ที่ออกมาจากการตัดสินใจ 5 อย่างก่อนหน้านั้น ตัดสินใจ 5 ข้อนี้ให้ถูก ราคาจะจัดตัวเองให้เหมาะสม ตัดสินใจผิด ต่อให้กดราคาลงมาได้ คุณก็ไปจ่ายคืนทีหลังในรูปค่าไฟ ค่าซ่อม และของเสียในห้อง
 
-ตั้งแต่ปี 1987 THERMO ออกแบบและติดตั้งห้องเย็นมาแล้วกว่า 500 โครงการ — ตั้งแต่คลังสินค้าระหว่างประเทศที่สุวรรณภูมิ ห้องเย็นหลังร้าน KFC กว่า 200 สาขาทั่วประเทศ ไปจนถึงห้องเก็บทุเรียนสดที่จันทบุรีและห้องควบคุมความชื้นของสายการผลิตแบตเตอรี่ สิ่งที่เราเห็นซ้ำ ๆ คือ **โครงการที่จบสวยกับโครงการที่ต้องกลับมาแก้ทีหลัง มันแยกทางกันตั้งแต่บทสนทนาแรก ไม่ใช่ที่ราคา**
+ตั้งแต่ปี 1987 THERMO ออกแบบและติดตั้งห้องเย็นมาแล้วกว่า 2,000 โครงการ — ตั้งแต่คลังสินค้าระหว่างประเทศที่สุวรรณภูมิ ห้องเย็นหลังร้าน KFC กว่า 200 สาขาทั่วประเทศ ไปจนถึงห้องเก็บทุเรียนสดที่จันทบุรีและห้องควบคุมความชื้นของสายการผลิตแบตเตอรี่ สิ่งที่เราเห็นซ้ำ ๆ คือ **โครงการที่จบสวยกับโครงการที่ต้องกลับมาแก้ทีหลัง มันแยกทางกันตั้งแต่บทสนทนาแรก ไม่ใช่ที่ราคา**
 
 บทความนี้ไม่ได้มาบอกว่า "เตรียมอะไรบ้าง" แบบที่หาอ่านได้ทั่วไป แต่จะพาดูว่าแต่ละการตัดสินใจมันไปคุมต้นทุนตรงไหน และถ้าพลาดจะเกิดอะไรขึ้นจริง ๆ
 
@@ -1766,7 +1766,7 @@ export const articles = [
 
 We get it — it's the easiest question to ask. But it's the wrong one to ask first, because the price of a cold room isn't a starting point you choose. It's the **result** of five decisions made before it. Get these five right and the price settles into place. Get them wrong, and even if you push the quote down, you pay it back later in electricity, repairs, and spoiled product.
 
-Since 1987, THERMO has designed and installed more than 500 cold room projects — from international cargo cold storage at Suvarnabhumi, to the back-of-house rooms in over 200 KFC branches nationwide, to fresh-durian storage in Chanthaburi and humidity-controlled rooms on a battery production line. What we see again and again is this: **the projects that end well and the ones that get reworked later split apart in the very first conversation — not on price.**
+Since 1987, THERMO has designed and installed more than 2,000 cold room projects — from international cargo cold storage at Suvarnabhumi, to the back-of-house rooms in over 200 KFC branches nationwide, to fresh-durian storage in Chanthaburi and humidity-controlled rooms on a battery production line. What we see again and again is this: **the projects that end well and the ones that get reworked later split apart in the very first conversation — not on price.**
 
 This article isn't the usual "what to prepare" checklist. It shows where each decision actually drives your cost, and what really happens when you get it wrong.
 
@@ -1950,7 +1950,7 @@ A cold room runs 24 hours a day, so it needs regular PM to control electricity c
     },
     body: {
       th: [
-        "ตั้งแต่ปี 1987 THERMO ออกแบบและติดตั้งห้องเย็นมาแล้วกว่า 500 โครงการ ตั้งแต่คลังสินค้าระหว่างประเทศของการบินไทยที่สุวรรณภูมิ ไปจนถึงห้องเย็นหลังร้าน KFC 250 สาขาทั่วประเทศ เราพบว่าโครงการที่จบสวยกับโครงการที่ต้องมาแก้ทีหลัง ต่างกันตั้งแต่บทสนทนาแรก ไม่ใช่ที่ราคา",
+        "ตั้งแต่ปี 1987 THERMO ออกแบบและติดตั้งห้องเย็นมาแล้วกว่า 2,000 โครงการ ตั้งแต่คลังสินค้าระหว่างประเทศของการบินไทยที่สุวรรณภูมิ ไปจนถึงห้องเย็นหลังร้าน KFC กว่า 200 สาขาทั่วประเทศ เราพบว่าโครงการที่จบสวยกับโครงการที่ต้องมาแก้ทีหลัง ต่างกันตั้งแต่บทสนทนาแรก ไม่ใช่ที่ราคา",
         "ห้องเย็นที่ \"ถูก\" แต่เครื่องเล็กไป จะวิ่งไม่หยุด กินไฟกว่า และพังเร็วกว่า ส่วนห้องที่ \"เผื่อไว้เยอะ\" ก็จ่ายค่าเครื่องเกินจำเป็นตั้งแต่วันแรก จุดที่คุ้มที่สุดอยู่ตรงกลาง และมันคำนวณได้ — ถ้ามีข้อมูล 5 อย่างนี้",
         "1. ลักษณะการใช้งานและประเภทสินค้า: สินค้าแต่ละแบบต้องการไม่เหมือนกัน เก็บรักษาเฉยๆ กับลดอุณหภูมิสินค้าที่เพิ่งเข้ามา ใช้เครื่องคนละขนาดกันมาก และต้องบอกด้วยว่ามีฟอร์กลิฟต์วิ่งเข้าไปในห้องไหม มีการแปรรูปในห้องไหม แพ็กเกจสินค้าเป็นแบบไหน — ทุเรียนสดที่จันทบุรีกับ Raw Material ในโรงงานอิเล็กทรอนิกส์ ใช้ตรรกะการออกแบบคนละชุด",
         "2. ปริมาณสินค้าที่ต้องเก็บ: ไม่ใช่แค่ \"ห้องกี่ตารางเมตร\" แต่คือของเข้าออกวันละเท่าไหร่ ปริมาณและชนิดของสินค้ามีผลกับขนาดเครื่องทำความเย็นอย่างมาก โดยเฉพาะห้องเย็นที่อยู่ในกระบวนการผลิต ซึ่งของเข้าใหม่ตลอดเวลา",
@@ -1960,7 +1960,7 @@ A cold room runs 24 hours a day, so it needs regular PM to control electricity c
         "ถ้าเตรียมคำตอบ 5 ข้อนี้ไว้ก่อนคุยกับผู้ออกแบบ คุณจะได้ห้องเย็นที่เหมาะกับงานของคุณจริงๆ และคุ้มที่สุดในระยะยาว — ไม่ใช่แค่ถูกที่สุดในใบเสนอราคา หากยังไม่แน่ใจข้อไหน โทรคุยกับทีมวิศวกรของ THERMO ได้เลย เราช่วยคิดตั้งแต่ก่อนคุณตัดสินใจ"
       ],
       en: [
-        "Since 1987, across more than 500 projects — from Thai Airways' international cargo cold rooms at Suvarnabhumi to the back-of-house rooms in 250 KFC branches nationwide — THERMO has learned that the projects which end well are separated from the ones that get reworked in the very first conversation. Not by price.",
+        "Since 1987, across more than 2,000 projects — from Thai Airways' international cargo cold rooms at Suvarnabhumi to the back-of-house rooms in over 200 KFC branches nationwide — THERMO has learned that the projects which end well are separated from the ones that get reworked in the very first conversation. Not by price.",
         "A \"cheap\" room with an undersized unit never stops running: it burns more electricity and fails sooner. An over-specified room means you pay for capacity you never use from day one. The sweet spot sits between them, and it can be calculated — if you have these five pieces of information.",
         "1. How it will be used and what goes inside: Storage-only and pull-down of freshly arrived product require very different capacity. Tell your designer whether forklifts will enter the room, whether processing happens inside, and how the product is packaged. Fresh durian in Chanthaburi and raw material in an electronics plant follow completely different design logic.",
         "2. Volume of product: Not just \"how many square metres\" but how much moves in and out per day. Product type and throughput drive compressor sizing heavily — especially for rooms inside a production process, where new load arrives continuously.",

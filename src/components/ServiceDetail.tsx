@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ChevronRight, CheckSquare, ArrowRight, Home, Shield, PhoneCall } from 'lucide-react';
+import { ChevronRight, CheckSquare, ArrowRight, Home, Shield, PhoneCall, Calculator } from 'lucide-react';
 import { servicesDetailList, serviceRelatedArticles, articlesList } from '../content';
 import { ImageWithFallback } from './ImageWithFallback';
 
@@ -87,14 +87,38 @@ export function ServiceDetail({
               </p>
             </div>
 
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 flex flex-col gap-3 w-full md:w-[340px]">
               <button
                 onClick={onOpenQuote}
-                className="bg-brand-green hover:bg-brand-green/90 text-white font-bold font-sans text-xs px-8 py-4 rounded-xl shadow-lg hover:shadow-brand-green/20 transition-all hover:-translate-y-0.5 inline-flex items-center space-x-2 cursor-pointer"
+                className="bg-brand-green hover:bg-brand-green/90 text-white font-bold font-sans text-xs px-8 py-4 rounded-xl shadow-lg hover:shadow-brand-green/20 transition-all hover:-translate-y-0.5 inline-flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <span>{lang === 'th' ? 'ขอใบเสนอราคา' : 'Get a Quote'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
+
+              {/* ── ลิงก์เครื่องคำนวณขนาดห้องเย็น — เฉพาะหน้าห้องเย็น ──
+                   หน้าเครื่องคำนวณเป็นไฟล์ static แยก (public_html/tools/cold-room-calculator/)
+                   ต้องเป็น <a href> ธรรมดา ห้ามเปลี่ยนเป็น onNavigate() ไม่งั้นจะเจอ 404 ของ SPA */}
+              {service.id === 'coldroom' && (
+                <a
+                  href="/tools/cold-room-calculator/"
+                  className="group bg-white/10 hover:bg-white/15 border border-white/25 hover:border-brand-green text-white rounded-xl px-5 py-3.5 flex items-center gap-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-green"
+                >
+                  <span className="p-2 rounded-lg bg-brand-green/20 text-brand-green flex-shrink-0">
+                    <Calculator className="w-5 h-5" />
+                  </span>
+                  <span className="text-left leading-snug">
+                    <span className="block font-bold font-sans text-sm">
+                      {lang === 'th' ? 'เครื่องคำนวณขนาดห้องเย็นเบื้องต้น' : 'Cold room load calculator'}
+                    </span>
+                    <span className="block text-[11px] sm:text-xs text-brand-surface/70 font-sans">
+                      {lang === 'th'
+                        ? 'กรอก 4 ขั้นตอน รู้ขนาดเครื่องโดยประมาณ พร้อมภาพห้อง 3 มิติ'
+                        : 'Estimate refrigeration capacity in 4 steps, with a 3D room view (Thai)'}
+                    </span>
+                  </span>
+                </a>
+              )}
             </div>
           </div>
         </div>

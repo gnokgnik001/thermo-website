@@ -29,6 +29,8 @@ const urls = [
   { loc: '/knowledge/', priority: '0.8', changefreq: 'weekly' },
   ...services.map(s => ({ loc: `/services/${s.id}/`, priority: '0.9', changefreq: 'monthly' })),
   ...articles.map(a => ({ loc: `/knowledge/${a.id}/`, priority: '0.7', changefreq: 'monthly' })),
+  // เครื่องมือ (ไฟล์ static แยกจาก React อยู่ที่ public_html/tools/...) — ภาษาไทยอย่างเดียว
+  { loc: '/tools/cold-room-calculator/', priority: '0.8', changefreq: 'monthly' },
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -54,12 +56,15 @@ fs.writeFileSync(path.join(root, 'public', 'robots.txt'), robots, 'utf8');
 const th = (v) => (v && typeof v === 'object' ? (v.th || v.en || '') : String(v || ''));
 const llms = `# THERMO Co., Ltd. (บริษัท เทอร์โม จำกัด)
 
-> ผู้เชี่ยวชาญด้านการออกแบบ ติดตั้ง และบำรุงรักษาระบบทำความเย็นอุตสาหกรรมแบบครบวงจร ก่อตั้งปี 1987 ทีมวิศวกรประสบการณ์รวมกว่า 40 ปี ผลงานกว่า 500 โครงการ
+> ผู้เชี่ยวชาญด้านการออกแบบ ติดตั้ง และบำรุงรักษาระบบทำความเย็นอุตสาหกรรมแบบครบวงจร ก่อตั้งปี 1987 ทีมวิศวกรประสบการณ์รวมกว่า 40 ปี ผลงานกว่า 2,000 โครงการ
 
 THERMO ให้บริการห้องเย็น ห้องแช่แข็ง Blast Freezer ระบบชิลเลอร์ ห้องควบคุมความชื้น Wine Cellar ประตูความเร็วสูง และระบบมอนิเตอร์ริ่ง
 
 ## บริการ (Services)
 ${services.map(s => `- [${th(s.title)}](${base}/services/${s.id}/)`).join('\n')}
+
+## เครื่องมือ (Tools)
+- [เครื่องคำนวณขนาดห้องเย็นเบื้องต้น (Cold Room Load Calculator, ภาษาไทย)](${base}/tools/cold-room-calculator/): ประเมินขนาดเครื่องทำความเย็นเบื้องต้นสำหรับห้องเย็น ห้องแช่แข็ง และ Blast Freezer จากขนาดห้อง สินค้า อุณหภูมิ และสภาพการใช้งาน พร้อมภาพห้อง 3 มิติ ผลลัพธ์เป็นค่าประมาณ ขนาดสำหรับเลือกซื้อจริงต้องให้วิศวกร THERMO ตรวจสอบ
 
 ## คลังความรู้ (Knowledge Base)
 ${articles.map(a => `- [${th(a.title)}](${base}/knowledge/${a.id}/)`).join('\n')}

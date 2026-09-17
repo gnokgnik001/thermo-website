@@ -18,6 +18,8 @@ const template = fs.readFileSync(templatePath, 'utf8');
 const C = await import(pathToFileURL(path.join(root, 'src', 'content.js')).href);
 const SITE = C.SITE_URL;
 const t = { th: C.translations.th, en: C.translations.en };
+// หน้าเครื่องคำนวณขนาดห้องเย็น — ไฟล์ static แยกจาก React อยู่ที่ public_html/tools/cold-room-calculator/
+const TOOL_PATH = '/tools/cold-room-calculator/';
 
 const esc = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -48,10 +50,10 @@ function metaFor(page, id, lang) {
   if (page === 'home') {
     if (lang === 'th') {
       title = 'THERMO Co., Ltd. | ผู้เชี่ยวชาญระบบทำความเย็นอุตสาหกรรม ห้องเย็น ชิลเลอร์';
-      desc = 'บริษัท เทอร์โม จำกัด - ออกแบบ ติดตั้ง และบำรุงรักษาระบบทำความเย็นอุตสาหกรรม ห้องเย็นสำเร็จรูป และเครื่องทำน้ำเย็นชิลเลอร์ประสิทธิภาพสูง ให้บริการตั้งแต่ปี 2530 ผลงานกว่า 500 โครงการทั่วประเทศ';
+      desc = 'บริษัท เทอร์โม จำกัด - ออกแบบ ติดตั้ง และบำรุงรักษาระบบทำความเย็นอุตสาหกรรม ห้องเย็นสำเร็จรูป และเครื่องทำน้ำเย็นชิลเลอร์ประสิทธิภาพสูง ให้บริการตั้งแต่ปี 2530 ผลงานกว่า 2,000 โครงการทั่วประเทศ';
     } else {
       title = 'THERMO Co., Ltd. | Industrial Cooling Systems, Cold Room & Chiller Specialists';
-      desc = 'THERMO Co., Ltd. - Industrial refrigeration, turnkey cold rooms and process chillers since 1987. Over 500 projects delivered across Thailand.';
+      desc = 'THERMO Co., Ltd. - Industrial refrigeration, turnkey cold rooms and process chillers since 1987. Over 2,000 projects delivered across Thailand.';
     }
   } else if (page === 'services') {
     const svc = C.servicesData.find(s => s.id === id);
@@ -151,7 +153,13 @@ function contentFor(page, id, lang) {
     const sdesc = svc ? tl[svc.descKey] : '';
     const others = C.servicesData.filter(s => s.id !== id)
       .map(s => `<li><a href="${routeToPath('services', s.id, lang)}">${escText(tl[s.titleKey])}</a></li>`).join('');
-    return wrap(`<article><h1>${escText(stitle)}</h1><p>${escText(sdesc)}</p>
+    // หน้าห้องเย็น: ลิงก์เครื่องคำนวณขนาดห้องเย็น (หน้า static แยก ภาษาไทยอย่างเดียว)
+    const toolLink = id === 'coldroom'
+      ? `<p>${lang === 'th'
+          ? 'ประเมินขนาดเครื่องทำความเย็นเบื้องต้นด้วยตัวเองได้ที่'
+          : 'Get a preliminary refrigeration capacity estimate with our'} <a href="${SITE}${TOOL_PATH}">${lang === 'th' ? 'เครื่องคำนวณขนาดห้องเย็นเบื้องต้น' : 'cold room load calculator (Thai)'}</a></p>`
+      : '';
+    return wrap(`<article><h1>${escText(stitle)}</h1><p>${escText(sdesc)}</p>${toolLink}
 <h2>${lang === 'th' ? 'บริการอื่นของ THERMO' : 'Other THERMO services'}</h2><ul>${others}</ul>
 <p>${lang === 'th' ? 'ดูผลงาน' : 'See our'} <a href="${routeToPath('portfolio', null, lang)}">${lang === 'th' ? 'ผลงานทั้งหมด' : 'portfolio'}</a> ${lang === 'th' ? 'หรือ' : 'or'} <a href="${routeToPath('knowledge', null, lang)}">${lang === 'th' ? 'คลังความรู้' : 'knowledge base'}</a>.</p></article>`);
   }
@@ -199,7 +207,7 @@ function contentFor(page, id, lang) {
   const h1 = lang === 'th' ? 'THERMO Co., Ltd. — ผู้เชี่ยวชาญระบบทำความเย็นอุตสาหกรรม ตั้งแต่ปี 1987' : 'THERMO Co., Ltd. — Industrial Cooling System Specialists since 1987';
   const p = metaFor('home', null, lang).desc;
   return wrap(`<h1>${escText(h1)}</h1><p>${escText(p)}</p><h2>${lang === 'th' ? 'บริการ' : 'Services'}</h2><ul>${svcList}</ul>
-<p><a href="${routeToPath('portfolio', null, lang)}">${lang === 'th' ? 'ผลงานทั้งหมด' : 'Portfolio'}</a> · <a href="${routeToPath('knowledge', null, lang)}">${lang === 'th' ? 'คลังความรู้' : 'Knowledge'}</a></p>`);
+<p><a href="${routeToPath('portfolio', null, lang)}">${lang === 'th' ? 'ผลงานทั้งหมด' : 'Portfolio'}</a> · <a href="${routeToPath('knowledge', null, lang)}">${lang === 'th' ? 'คลังความรู้' : 'Knowledge'}</a> · <a href="${TOOL_PATH}">${lang === 'th' ? 'เครื่องคำนวณขนาดห้องเย็น' : 'Cold room load calculator (Thai)'}</a></p>`);
 }
 
 // ---- ประกอบไฟล์ HTML ต่อ route ----
@@ -216,6 +224,8 @@ function buildPage(page, id, lang) {
   html = html.replace(/(<meta property="og:title" content=")[\s\S]*?("\s*\/?>)/, `$1${esc(title)}$2`);
   html = html.replace(/(<meta property="og:description" content=")[\s\S]*?("\s*\/?>)/, `$1${esc(desc)}$2`);
   html = html.replace(/(<meta property="og:locale" content=")[^"]*(")/, `$1${lang === 'th' ? 'th_TH' : 'en_US'}$2`);
+  html = html.replace(/(<meta name="twitter:title" content=")[\s\S]*?("\s*\/?>)/, `$1${esc(title)}$2`);
+  html = html.replace(/(<meta name="twitter:description" content=")[\s\S]*?("\s*\/?>)/, `$1${esc(desc)}$2`);
 
   // hreflang — เพิ่มก่อน </head>
   const alts = [['th', 'th'], ['en', 'en'], ['x-default', 'th']]
