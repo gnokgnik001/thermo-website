@@ -1,0 +1,118 @@
+# ============================================================
+#  THERMO website — Apache config (Site5/cPanel)
+# ============================================================
+
+# ==========================================================
+#  ส่วนที่ 0 — บอก Apache ว่าคำขอนี้เป็น https จริง (ต้องอยู่บนสุด)
+#  ⚠️ Site5 อยู่หลัง Cloudflare (Flexible SSL) → connection ระหว่าง
+#     Cloudflare กับ origin เป็น http เสมอ Apache เลยไม่รู้ว่า
+#     ผู้ใช้เข้ามาทาง https จริง ทำให้ mod_dir (auto-redirect เติม
+#     trailing slash ให้โฟลเดอร์) ยิง 301 ออกไปเป็น http:// แทนที่
+#     จะเป็น https:// กลายเป็น redirect 2 ชั้นซ้อนกันโดยไม่จำเป็น
+#     บรรทัดนี้ทำให้ Apache มองว่า HTTPS=on ตั้งแต่ต้น ก่อนที่
+#     mod_dir หรือ mod_rewrite จะทำงาน
+# ==========================================================
+<IfModule mod_setenvif.c>
+  SetEnvIf X-Forwarded-Proto "https" HTTPS=on
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ==========================================================
+  #  ส่วนที่ 1 — บังคับ https + www (เวอร์ชันกัน redirect loop)
+  #  ตอนนี้ %{HTTPS} จะถูกต้องแล้วจากส่วนที่ 0 ด้านบน แต่ยังเก็บ
+  #  เงื่อนไข X-Forwarded-Proto ไว้เป็น fallback เผื่อ mod_setenvif
+  #  ไม่พร้อมใช้งานบน server
+  # ==========================================================
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://www.thermothailand.com%{REQUEST_URI} [R=301,L]
+
+  # บังคับ www (ทำงานหลังจากเป็น https แล้ว)
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^ https://www.thermothailand.com%{REQUEST_URI} [R=301,L]
+
+  # ==========================================================
+  #  ส่วนที่ 1.5 — เติม trailing slash ให้โฟลเดอร์เอง (แทน mod_dir)
+  #  ⚠️ ทดสอบแล้วพบว่า mod_dir ของ Apache (DirectorySlash) ไม่อ่านค่า
+  #     จาก SetEnvIf ด้านบนเลย มันเช็คสถานะ SSL จาก connection จริง
+  #     เท่านั้น เลย 301 ออกไปเป็น http:// เสมอ (ผิด เพราะ origin เจอ
+  #     แต่ Cloudflare เสมอเป็น http ในโหมด Flexible SSL) ทำให้เกิด
+  #     redirect ซ้อน 2 ชั้น จึงต้องปิด mod_dir แล้วเขียนกฎเองแทน
+  #     โดย hardcode https://www.thermothailand.com ตรงๆ ไม่พึ่ง
+  #     Apache เดา scheme อีก
+  # ==========================================================
+  <IfModule mod_dir.c>
+    DirectorySlash Off
+  </IfModule>
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*[^/])$ https://www.thermothailand.com/$1/ [R=301,L]
+
+  # ==========================================================
+  #  ส่วนที่ 2 — 301 redirect จาก URL เว็บเก่า (WordPress)
+  #  ต้องอยู่ "ก่อน" ส่วนที่ 3 เสมอ ไม่งั้นจะไม่ทำงาน
+  #  (th/)? = รองรับทั้ง /xxx และ /th/xxx ในกฎเดียว
+  #  ⚠️ ปลายทางมี "/" ต่อท้ายเสมอ ให้ตรงกับ canonical/โครงสร้างไฟล์จริง
+  #     (services/coldroom/index.html) — กันไม่ให้เด้งไปเจอกฎส่วนที่ 1.5
+  #     ซ้ำอีกรอบจนกลายเป็น 2 hop โดยไม่จำเป็น
+  # ==========================================================
+
+  # --- หน้าบริการ ---
+  RewriteRule ^(th/)?products-and-services/cold-room-freezer/?$          https://www.thermothailand.com/services/coldroom/ [R=301,L]
+  RewriteRule ^(th/)?products-and-services/humidity-control-cold-room/?$ https://www.thermothailand.com/services/special/ [R=301,L]
+  RewriteRule ^(th/)?products-and-services/package-chiller/?$            https://www.thermothailand.com/services/chiller/ [R=301,L]
+  RewriteRule ^(th/)?products-and-services/industrial-chiller/?$         https://www.thermothailand.com/services/chiller/ [R=301,L]
+  RewriteRule ^(th/)?products-and-services/chiller-for-hydroponics-farm/?$ https://www.thermothailand.com/services/chiller/ [R=301,L]
+  # เผื่อมีหน้าย่อยอื่นที่ Google ยังไม่แสดง ให้ไปหน้าบริการห้องเย็น
+  RewriteRule ^(th/)?products-and-services/?.*$                          https://www.thermothailand.com/services/coldroom/ [R=301,L]
+
+  # --- ผลงาน ---
+  RewriteRule ^(th/)?our-experiences/?$   https://www.thermothailand.com/portfolio/ [R=301,L]
+
+  # --- เกี่ยวกับเรา / ติดต่อ (เว็บใหม่เป็น section ในหน้าแรก) ---
+  RewriteRule ^(th/)?aboutus/?$    https://www.thermothailand.com/#about [R=301,L,NE]
+  RewriteRule ^(th/)?about-us/?$   https://www.thermothailand.com/#about [R=301,L,NE]
+  RewriteRule ^(th/)?contact-us/?$ https://www.thermothailand.com/#contact [R=301,L,NE]
+
+  # --- รับสมัครงาน → หน้าสมัครงานจริงบนเว็บใหม่ ---
+  RewriteRule ^(th/)?recruitment/?$ https://www.thermothailand.com/careers/ [R=301,L]
+
+  # --- หน้าแรกภาษาไทยของเว็บเก่า (เว็บใหม่ default เป็นไทยอยู่แล้ว) ---
+  RewriteRule ^th/?$ https://www.thermothailand.com/ [R=301,L]
+
+  # ==========================================================
+  #  ส่วนที่ 3 — SPA routing (ต้องอยู่ล่างสุดเสมอ)
+  #  ทำให้เปิด /knowledge/rg4-license ตรงๆ ได้
+  # ==========================================================
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# ============================================================
+#  ส่วนที่ 4 — การเก็บ cache ของเบราว์เซอร์
+#  ตอนนี้ = "โหมดกำลังทยอยใส่รูป" เปลี่ยนรูปแล้วเห็นผลทันที
+#
+#  ⚠️ พอใส่รูปครบและเว็บนิ่งแล้ว ให้แก้ 3 บรรทัด image/*
+#     จาก "access plus 0 seconds" เป็น "access plus 1 month"
+#     (หลังจากนั้นถ้าเปลี่ยนรูป ต้องตั้งชื่อไฟล์ใหม่ด้วย)
+# ============================================================
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType image/jpeg "access plus 0 seconds"
+  ExpiresByType image/png "access plus 0 seconds"
+  ExpiresByType image/webp "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|jpg|jpeg|png|webp)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
