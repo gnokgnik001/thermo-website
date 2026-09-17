@@ -1,0 +1,18 @@
+itignore · TXT
+# dependencies (ติดตั้งใหม่ด้วย npm install ได้ ไม่ต้องเก็บใน repo)
+node_modules/
+ 
+# build output (สร้างใหม่ด้วย npm run build ได้)
+dist/
+ 
+# secrets — ห้ามขึ้น repo เด็ดขาด
+.env
+.env.*
+!.env.example
+public/mail-config.php
+mail-config.php
+ 
+# logs / OS junk
+*.log
+.DS_Store
+ 
