@@ -9,8 +9,13 @@ async function startServer() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // API handler for quote/contact form (/sendmail.php)
-  app.post("/sendmail.php", (req, res) => {
+  // Health check endpoint
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok" });
+  });
+
+  // API handler for quote/contact form (/quote-submit.php & /sendmail.php)
+  const handleQuote = (req: express.Request, res: express.Response) => {
     const { name, phone } = req.body || {};
     if (!name || !phone) {
       return res.status(200).json({
@@ -20,12 +25,21 @@ async function startServer() {
     }
     console.log("[THERMO Server] Received quote request:", req.body);
     return res.json({ ok: true });
+  };
+
+  app.post("/quote-submit.php", handleQuote);
+  app.post("/sendmail.php", handleQuote);
+  app.get(["/quote-submit.php", "/sendmail.php"], (_req, res) => {
+    res.json({ ok: true, status: "ready" });
   });
 
   // API handler for job application (/sendresume.php)
   app.post("/sendresume.php", (req, res) => {
     console.log("[THERMO Server] Received application submission");
     return res.json({ ok: true });
+  });
+  app.get("/sendresume.php", (_req, res) => {
+    res.json({ ok: true, status: "ready" });
   });
 
   // Vite middleware for development
